@@ -1,0 +1,6 @@
+.activeStyle {
+    background-color: white;
+}
+.activeStyle:active {
+    background-color: white;
+}

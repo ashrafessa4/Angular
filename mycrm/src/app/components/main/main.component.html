@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2 ps-0 ">
+            <app-sidenav></app-sidenav>
+        </div>
+        <div class="col-10">
+                <app-welcome *ngIf="getStatus()==0"></app-welcome>
+                <app-customers *ngIf="getStatus()==1"></app-customers>
+                <app-contacts *ngIf="getStatus()==2"></app-contacts>
+        </div>
+    </div>
+</div>

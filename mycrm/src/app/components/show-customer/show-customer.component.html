@@ -1,0 +1,116 @@
+<div class="text-center">
+  <div class="form-floating me-3 mt-3 col-3 d-inline-block">
+    <div class="input-group input-group-lg inputs">
+      <span class="input-group-text"
+        ><i class="fa-solid fa-magnifying-glass"></i
+      ></span>
+      <input
+        type="search"
+        name="first"
+        class="form-control"
+        placeholder="First Name"
+        [(ngModel)]="customerFirstName"
+      />
+    </div>
+  </div>
+    <div class="form-floating me-3 mt-3 col-3 d-inline-block">
+      <div class="input-group inputs input-group-lg">
+        <span class="input-group-text"
+          ><i class="fa-solid fa-magnifying-glass"></i
+        ></span>
+        <input
+          type="search"
+          class="form-control"
+          placeholder="Last Name"
+          [(ngModel)]="customerLastName"
+        />
+      </div>
+    </div>
+      <div class="form-floating me-3 mt-3 col-3 d-inline-block">
+        <div class="input-group input-group-lg inputs">
+          <span class="input-group-text"
+            ><i class="fa-solid fa-magnifying-glass"></i
+          ></span>
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Phone Number"
+            [(ngModel)]="customerPhone"
+          />
+        </div>
+      </div>
+  <div class="mt-3 d-inline-block">
+    <button class="btn btn-lg btn-outline-primary" (click)="addCustomer()">
+      <svg
+        _ngcontent-ynp-c22=""
+        width="16"
+        height="16"
+        class="svg-inline--fa fa-plus"
+        aria-hidden="true"
+        focusable="false"
+        data-prefix="fas"
+        data-icon="plus"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 448 512"
+        data-fa-i2svg=""
+      >
+        <path
+          fill="currentColor"
+          d="M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z"
+        ></path>
+      </svg>
+      Add Customer
+    </button>
+  </div>
+</div>
+<table class="table text-center table-hover table-bordered table-responsive"
+*ngIf="(this.customers | filterr: 'first':customerFirstName
+| filterr: 'last':customerLastName
+| filterr: 'phone':customerPhone).length > 0; else noCustomers">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Edit</th>
+      <th>Delete</th>
+      <th>View</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="
+        let customer of customers | filterr: 'first':customerFirstName
+        | filterr: 'last':customerLastName
+        | filterr: 'phone':customerPhone  ; index as i
+      "
+    >
+      <td>{{ i + 1 }}</td>
+      <td>{{ customer.first }}</td>
+      <td>{{ customer.last }}</td>
+      <td>{{ customer.phone }}</td>
+      <td>{{ customer.email }}</td>
+      <td>
+        <i
+          class="fa-solid fa-pen-to-square text-success"
+          (click)="updateCustomer(customer)"
+        ></i>
+      </td>
+      <td>
+        <i
+          class="fa-solid fa-trash text-danger"
+          (click)="deleteCustomer(customer)"
+        ></i>
+      </td>
+      <td>
+        <i class="fa-regular fa-eye" (click)="viewCustomer(customer)"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #noCustomers>
+<H1 class="text-center mt-5">No Customers Found</H1>
+</ng-template>
